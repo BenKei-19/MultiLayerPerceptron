@@ -2,41 +2,26 @@
 
 ## Introduction
 
-As you know, some algorithms such as linear regression, logistic regression, softmax classification, or Perceptron learning algorithms (PLA) it needs classes linearly separable (difficult in real life). To solve this, multi layer perceptron is used.
-
+As you know, some algorithms such as linear regression, logistic regression, softmax classification, or Perceptron learning algorithms (PLA) require classes to be linearly separable (which is difficult in real life). To solve this, a multi-layer perceptron is used.
 
 ## Problem Description
-Suppose you have the datasets like that:
+Suppose you have datasets like this:
 <img src="Image/EX.png" width=800><br/>
-The classes is not linear separable, so we will use MLP to tackle it, we will add one hidden layer between input layer and output layer as following:
+The classes are not linearly separable, so we will use MLP to tackle this. We will add one hidden layer between the input layer and the output layer as shown below:
 <img src="Image/HiddenLayer.png" width=800><br/>
-Your problem is train a model that classifiers the linear 
+Your task is to train a model that classifies the data correctly.
+
 ## Behind the scenes
 
-This picture shows more details about MLP 
-<style>
-        .bold { font-weight: bold; }
-        .sup { font-size: 70%; vertical-align: super; }
-        .bot { font-size: 70%; vertical-align: sub; }
-        .fraction {
-            display: inline-block;
-            text-align: center;
-            vertical-align: middle;
-        }
-        .fraction > span {
-            display: block;
-            padding: 0 5px;
-        }
-        .fraction .top {
-            border-bottom: 1px solid black;
-        }
-    </style>
+This image shows more details about MLP:
 <img src="Image/MoreDetailHiddenlayer.png" width=800><br/>
 
-Note: <span class="bold">W</span><span class="sup">(l)</span> is weights to support the <span class="bold">z</span><span class="sup">(l)</span>, f(.) is often is ReLU function or others activation function, <span class="bold">b</span><span class="sup">(l)</span> is bias in layer l-th.
+Note: **W**<sup>(l)</sup> are the weights corresponding to **z**<sup>(l)</sup>. The activation function f(.) is often the ReLU function or another activation function. **b**<sup>(l)</sup> is the bias in the l-th layer.
 
-Suppose J is loss function, you want to reduce loss to increase the model is better. J can be mean square error or. 
-The derivative of the loss function with respect to a single component of the weight matrix of the final layer:
+Suppose J is the loss function. To improve the model, we aim to minimize J. J can be the mean squared error or another loss function.
+
+The derivative of the loss function with respect to a single component of the weight matrix of the final layer is:
+
 \[
 \frac{\partial J}{\partial w_{ij}^{(L)}}
 = \frac{\partial J}{\partial z_j^{(L)}} \times \frac{\partial z_j^{(L)}}{\partial w_{ij}^{(L)}}
@@ -61,7 +46,7 @@ since:
 z_j^{(L)} = \mathbf{w}_j^{(L)T} \mathbf{a}^{(L-1)} + b_j^{(L)}
 \]
 
-Similarly, the derivative of the loss function with respect to the bias of the final layer using the chain rule is:
+Similarly, the derivative of the loss function with respect to the bias of the final layer, using the chain rule, is:
 
 \[
 \frac{\partial J}{\partial b_j^{(L)}}
@@ -69,14 +54,15 @@ Similarly, the derivative of the loss function with respect to the bias of the f
 = e_j^{(L)}
 \]
 
-Continue with (1) expresion and the picture shows more details about MLP:
+Continuing with the expression from (1) and the picture showing more details about MLP:
+
 \[
 \frac{\partial J}{\partial w_{ij}^{(l)}}
 = \frac{\partial J}{\partial z_j^{(l)}} \cdot \frac{\partial z_j^{(l)}}{\partial w_{ij}^{(l)}}
 = e_j^{(l)} a_i^{(l-1)}
 \]
 
-With:
+Where:
 
 \[
 e_j^{(l)} = \frac{\partial J}{\partial z_j^{(l)}}
@@ -95,14 +81,13 @@ e_j^{(l)} = \frac{\partial J}{\partial z_j^{(l)}}
 = \left( \mathbf{w}_{j:}^{(l+1)} \cdot \mathbf{e}^{(l+1)} \right) f'(z_j^{(l)})
 \]
 
+In which:
 
-
-
-In which 
 \[
 \mathbf{e}^{(l+1)} = \left[ e_1^{(l+1)}, e_2^{(l+1)}, \dots, e_{d^{(l+1)}}^{(l+1)} \right]^T \in \mathbb{R}^{d^{(l+1)} \times 1}
 \]
-and 
+and:
+
 \[
 \mathbf{w}_j^{(l+1)}
 \]
@@ -113,14 +98,15 @@ The sigma notation sums up in the second row of the operation appearing as \( a_
 ## Result
 <img src='Image/Result.png'>
 
-We have 99.33% to classifiers the datasets i told before with 20 hidden units and add one hidden layer.
+We have 99.33% accuracy on classifying the dataset mentioned earlier using 20 hidden units and one additional hidden layer.
 
 ## Requirements
-* **Python**
-* **Softmax regression**
-* **CrossEntropy**
-* **Gradient Descend**
+- **Python**
+- **Softmax regression**
+- **CrossEntropy**
+- **Gradient Descent**
 
 ## References
-* <a href='https://machinelearningcoban.com/2017/02/24/mlp/'> machinelearningcoban
-* <a href='https://cs231n.github.io/neural-networks-case-study/'> CS231n
+* [Machine Learning Cơ Bản](https://machinelearningcoban.com/2017/02/24/mlp/)
+* [CS231n Neural Networks Case Study](https://cs231n.github.io/neural-networks-case-study/)
+
