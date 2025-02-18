@@ -3,134 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLP Documentation</title>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <title>Multi Layer Perceptron (MLP) Documentation</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
+            margin: 20px;
             background-color: #f4f4f4;
         }
-        h1, h2 {
-            text-align: center;
+        h1, h2, h3 {
             color: #333;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 15px;
-        }
-        ul {
-            margin: 20px 0;
-            padding-left: 20px;
-        }
-        ul li {
-            margin-bottom: 10px;
-            font-size: 1.1em;
         }
         img {
             display: block;
             margin: 20px auto;
+            max-width: 100%;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .formula {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #0073e6;
+        }
+        ul {
+            list-style: circle;
+            padding-left: 20px;
         }
         a {
-            color: #2a9df4;
+            color: #0073e6;
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
-        .formula {
-            background-color: #fff;
-            padding: 10px;
-            border-left: 4px solid #2a9df4;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #888;
+        .note {
+            font-weight: bold;
         }
     </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+    </script>
 </head>
 <body>
+    <div class="container">
+        <h1>Multi Layer Perceptron (MLP)</h1>
 
-    <h1>Multi Layer Perceptron (MLP)</h1>
+        <h2>Introduction</h2>
+        <p>
+            As you know, some algorithms such as linear regression, logistic regression, softmax classification, or Perceptron learning algorithms (PLA) need classes to be linearly separable (which is difficult in real life). To solve this, multi layer perceptron (MLP) is used.
+        </p>
 
-    <h2>Introduction</h2>
-    <p>As you know, some algorithms such as linear regression, logistic regression, softmax classification, or Perceptron learning algorithms (PLA) require classes to be linearly separable (which is difficult in real life). To solve this, a multi-layer perceptron is used.</p>
+        <h2>Problem Description</h2>
+        <p>Suppose you have datasets like this:</p>
+        <img src="Image/EX.png" alt="Example Dataset">
+        <p>
+            The classes are not linearly separable, so we will use MLP to tackle this. We will add one hidden layer between the input layer and the output layer as shown below:
+        </p>
+        <img src="Image/HiddenLayer.png" alt="MLP Hidden Layer">
 
-    <h2>Problem Description</h2>
-    <p>Suppose you have datasets like this:</p>
-    <img src="Image/EX.png" width="800"/>
+        <h2>Behind the Scenes</h2>
+        <p>This diagram shows more details about the MLP structure:</p>
+        <img src="Image/MoreDetailHiddenlayer.png" alt="More Detail on Hidden Layer">
 
-    <p>The classes are not linearly separable, so we will use MLP to tackle this.</p>
-    <img src="Image/HiddenLayer.png" width="800"/>
+        <p class="note">Note:</p>
+        <p>
+            <strong>W<sup>(l)</sup></strong> represents the weights in layer l, <strong>z<sup>(l)</sup></strong> is the weighted sum, <strong>b<sup>(l)</sup></strong> is the bias, and f(.) is often the ReLU activation function or other activation functions.
+        </p>
 
-    <h2>Behind the scenes</h2>
-    <img src="Image/MoreDetailHiddenlayer.png" width="800"/>
+        <h3>Derivative of the Loss Function</h3>
+        <p>The derivative of the loss function with respect to a single component of the weight matrix in the final layer:</p>
+        <div class="formula">
+            \[
+            \frac{\partial J}{\partial w_{ij}^{(L)}}
+            = \frac{\partial J}{\partial z_j^{(L)}} \times \frac{\partial z_j^{(L)}}{\partial w_{ij}^{(L)}}
+            = e_j^{(L)} a_i^{(L-1)} \quad (1)
+            \]
+        </div>
 
-    <p>Note: <b>W</b><sup>(l)</sup> are the weights...</p>
+        <p>Where \( e_j^{(L)} \) is defined as:</p>
+        <div class="formula">
+            \[
+            e_j^{(L)} = \frac{\partial J}{\partial z_j^{(L)}}
+            \]
+        </div>
 
-    <p>The derivative of the loss function with respect to a single component:</p>
-    <div class="formula">
-        \[
-        \frac{\partial J}{\partial w_{ij}^{(L)}}
-        = \frac{\partial J}{\partial z_j^{(L)}} \times \frac{\partial z_j^{(L)}}{\partial w_{ij}^{(L)}}
-        = e_j^{(L)} a_i^{(L-1)} \quad (1)
-        \]
+        <p>The bias derivative is:</p>
+        <div class="formula">
+            \[
+            \frac{\partial J}{\partial b_j^{(L)}}
+            = \frac{\partial J}{\partial z_j^{(L)}} = e_j^{(L)}
+            \]
+        </div>
+
+        <p>Continuing from equation (1):</p>
+        <div class="formula">
+            \[
+            \frac{\partial J}{\partial w_{ij}^{(l)}}
+            = \frac{\partial J}{\partial z_j^{(l)}} \cdot \frac{\partial z_j^{(l)}}{\partial w_{ij}^{(l)}}
+            = e_j^{(l)} a_i^{(l-1)}
+            \]
+        </div>
+
+        <p>Where:</p>
+        <div class="formula">
+            \[
+            e_j^{(l)} = \frac{\partial J}{\partial z_j^{(l)}}
+            = \frac{\partial J}{\partial a_j^{(l)}} \cdot \frac{\partial a_j^{(l)}}{\partial z_j^{(l)}}
+            \]
+        </div>
+        <div class="formula">
+            \[
+            = \left( \sum_{k=1}^{d^{(l+1)}} \frac{\partial J}{\partial z_k^{(l+1)}} \cdot \frac{\partial z_k^{(l+1)}}{\partial a_j^{(l)}} \right) f'(z_j^{(l)})
+            \]
+        </div>
+        <div class="formula">
+            \[
+            = \left( \sum_{k=1}^{d^{(l+1)}} e_k^{(l+1)} w_{jk}^{(l+1)} \right) f'(z_j^{(l)})
+            \]
+        </div>
+        <div class="formula">
+            \[
+            = \left( \mathbf{w}_{j:}^{(l+1)} \cdot \mathbf{e}^{(l+1)} \right) f'(z_j^{(l)})
+            \]
+        </div>
+
+        <p>In which:</p>
+        <div class="formula">
+            \[
+            \mathbf{e}^{(l+1)} = \left[ e_1^{(l+1)}, e_2^{(l+1)}, \dots, e_{d^{(l+1)}}^{(l+1)} \right]^T \in \mathbb{R}^{d^{(l+1)} \times 1}
+            \]
+        </div>
+        <div class="formula">
+            \[
+            \mathbf{w}_j^{(l+1)}
+            \]
+        </div>
+        <p>
+            is understood as the row \( j-th \) of matrix \( \mathbf{W}^{(l+1)} \) (Note the colon; when the colon is absent, I assume it represents a column vector). The sigma notation sums up in the second row of the operation appearing as \( a_j^{(l)} \) contributing to the calculation of all \( z_k^{(l+1)} \), \( k = 1, 2, \dots, d^{(l+1)} \). The derivative expression outside the big parentheses is due to \( a_j^{(l)} = f(z_j^{(l)}) \). Up to this point, we can see that having a simple activation function with simple derivatives will be very helpful for computations.
+        </p>
+
+        <h2>Result</h2>
+        <p>We achieved 99.33% accuracy on the dataset using 20 hidden units and one hidden layer.</p>
+        <img src='Image/Result.png' alt="MLP Result">
+
+        <h2>Requirements</h2>
+        <ul>
+            <li>Python</li>
+            <li>Softmax regression</li>
+            <li>CrossEntropy</li>
+            <li>Gradient Descent</li>
+        </ul>
+
+        <h2>References</h2>
+        <ul>
+            <li><a href="https://machinelearningcoban.com/2017/02/24/mlp/" target="_blank">Machine Learning Cơ Bản</a></li>
+            <li><a href="https://cs231n.github.io/neural-networks-case-study/" target="_blank">CS231n Neural Networks Case Study</a></li>
+        </ul>
     </div>
-
-    <p>where \( e_j^{(L)} \) is defined as:</p>
-    <div class="formula">
-        \[
-        e_j^{(L)} = \frac{\partial J}{\partial z_j^{(L)}}
-        \]
-    </div>
-
-    <p>Continue with (1):</p>
-    <div class="formula">
-        \[
-        \frac{\partial J}{\partial w_{ij}^{(l)}}
-        = \frac{\partial J}{\partial z_j^{(l)}} \cdot \frac{\partial z_j^{(l)}}{\partial w_{ij}^{(l)}}
-        = e_j^{(l)} a_i^{(l-1)}
-        \]
-    </div>
-
-    <!-- Add more content as needed -->
-
-    <h2>Result</h2>
-    <img src="Image/Result.png" width="800"/>
-
-    <h2>Requirements</h2>
-    <ul>
-        <li>Python</li>
-        <li>Softmax regression</li>
-        <li>CrossEntropy</li>
-        <li>Gradient Descent</li>
-    </ul>
-
-    <h2>References</h2>
-    <ul>
-        <li><a href="https://machinelearningcoban.com/2017/02/24/mlp/">Machine Learning Cơ Bản</a></li>
-        <li><a href="https://cs231n.github.io/neural-networks-case-study/">CS231n Neural Networks Case Study</a></li>
-    </ul>
-
-    <footer>
-        <p>MLP Documentation | &copy; 2025</p>
-    </footer>
-
 </body>
 </html>
