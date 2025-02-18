@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLP Documentation</title>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+    </script>
+</head>
+<body>
+    <h1>Multi Layer Perceptron (MLP)</h1>
+
+    <h2>Introduction</h2>
+    <p>As you know, some algorithms such as linear regression, logistic regression...</p>
+
+    <h2>Problem Description</h2>
+    <p>Suppose you have datasets like this:</p>
+    <img src="Image/EX.png" width="800"/>
+
+    <p>The classes are not linearly separable, so we will use MLP to tackle this.</p>
+    <img src="Image/HiddenLayer.png" width="800"/>
+
+    <h2>Behind the scenes</h2>
+    <img src="Image/MoreDetailHiddenlayer.png" width="800"/>
+
+    <p>Note: <b>W</b><sup>(l)</sup> are the weights...</p>
+
+    <p>The derivative of the loss function with respect to a single component...</p>
+
+    <p>Here is a formula rendered using LaTeX:</p>
+    <p>
+    \[
+    \frac{\partial J}{\partial w_{ij}^{(L)}}
+    = \frac{\partial J}{\partial z_j^{(L)}} \times \frac{\partial z_j^{(L)}}{\partial w_{ij}^{(L)}}
+    = e_j^{(L)} a_i^{(L-1)} \quad (1)
+    \]
+    </p>
+
+    <p>where \( e_j^{(L)} \) is defined as:</p>
+
+    <p>
+    \[
+    e_j^{(L)} = \frac{\partial J}{\partial z_j^{(L)}}
+    \]
+    </p>
+
+    <p>Continue with (1):</p>
+
+    <p>
+    \[
+    \frac{\partial J}{\partial w_{ij}^{(l)}}
+    = \frac{\partial J}{\partial z_j^{(l)}} \cdot \frac{\partial z_j^{(l)}}{\partial w_{ij}^{(l)}}
+    = e_j^{(l)} a_i^{(l-1)}
+    \]
+    </p>
+
+    <!-- Add more content as needed -->
+
+    <h2>Result</h2>
+    <img src="Image/Result.png">
+
+    <h2>Requirements</h2>
+    <ul>
+        <li>Python</li>
+        <li>Softmax regression</li>
+        <li>CrossEntropy</li>
+        <li>Gradient Descent</li>
+    </ul>
+
+    <h2>References</h2>
+    <ul>
+        <li><a href="https://machinelearningcoban.com/2017/02/24/mlp/">Machine Learning Cơ Bản</a></li>
+        <li><a href="https://cs231n.github.io/neural-networks-case-study/">CS231n Neural Networks Case Study</a></li>
+    </ul>
+</body>
+</html>
