@@ -13,7 +13,7 @@ Your task is to train a model that classifies the data correctly.
 
 ## Behind the scenes
 
-<a href='https://benkei-19.github.io/MultiPerceptron/'> See here to more details</a>
+<a href='https://benkei-19.github.io/MultiLayerPerceptron/'> See here to more details</a>
 
 ## Result
 <img src='Image/Result.png'>
